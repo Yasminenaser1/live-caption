@@ -1,0 +1,5 @@
+venv/
+__pycache__/
+data/LibriSpeech/
+data/*.tar.gz
+data/pairs.json
