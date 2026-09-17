@@ -4,7 +4,7 @@ Streaming speech-to-text with a measured latency/accuracy tradeoff. The
 question isn't whether Whisper works — it's how much accuracy you give up to
 show text sooner.
 
-Run locally on CPU with `faster-whisper` (`tiny.en`, int8). No API keys, no
+Runs locally on CPU with `faster-whisper` (`tiny.en`, int8). No API keys, no
 paid services. Scored against LibriSpeech test-clean, so the numbers are
 comparable to published ones.
 
@@ -55,8 +55,8 @@ its cuts were forced** by the deadline rather than found by VAD, and WER
 don't exist on demand.
 
 **5. Overlapping windows made things worse, across three implementations.**
-The intuition is that overlap should fix boundary truncation, and more overlap
-should be better. Neither held:
+The intuition is that overlap should fix boundary truncation, and that more
+overlap should be better. Neither held:
 
 | Stitching method | win=3 hop=1.5 (2×) | win=5 hop=3 (1.7×) |
 |---|---|---|
@@ -77,7 +77,7 @@ gives a stable key to join on.
 
 ---
 
-## Diagnostics worth reading
+## A diagnostic worth reading
 
 The timestamp failure had a measurable cause. Dumping per-word absolute times
 across overlapping windows showed duplicate words landing ~40ms apart while
@@ -96,7 +96,7 @@ matching fixed that specific bug and still lost to text stitching.
   benchmark makes VAD look worse than it probably is in its intended setting.
 - **50 utterances per configuration** (100 for the baseline). Small.
 - **Only `tiny.en` was tested.** A larger model would be more accurate and
-  might handle short chunks better, since more of the error may be context
+  might handle short chunks better, since some of the error may be context
   starvation rather than truncation. Untested.
 - **Latency is modelled, not measured end to end.** It's chunk duration plus
   measured compute, which omits audio capture, buffering, and display. Real
