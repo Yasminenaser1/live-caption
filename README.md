@@ -121,7 +121,7 @@ without beating it on this corpus.
 
 ```bash
 python3 -m venv venv && source venv/bin/activate
-pip install faster-whisper jiwer soundfile numpy
+pip install -r requirements.txt
 
 # LibriSpeech test-clean (~330MB)
 mkdir -p data && cd data
